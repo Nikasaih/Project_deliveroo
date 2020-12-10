@@ -1,0 +1,4 @@
+bdd localitation: pas int et 2 champs 
+entité client rennseigner son adresse utiliser le géocoding 
+utilisateur role sur symfony 
+facture table de facture et pas modifiable 
