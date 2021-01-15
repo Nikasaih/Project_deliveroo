@@ -42,7 +42,7 @@ class Restaurant
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $ListAllergène;
+    private $ListAllergene;
 
     /**
      * @ORM\OneToMany(targetEntity=Plat::class, mappedBy="Restaurant", orphanRemoval=true)
@@ -107,14 +107,14 @@ class Restaurant
         return $this;
     }
 
-    public function getListAllergène(): ?string
+    public function getListAllergene(): ?string
     {
-        return $this->ListAllergène;
+        return $this->ListAllergene;
     }
 
-    public function setListAllergène(string $ListAllergène): self
+    public function setListAllergene(string $ListAllergene): self
     {
-        $this->ListAllergène = $ListAllergène;
+        $this->ListAllergene = $ListAllergene;
 
         return $this;
     }

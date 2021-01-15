@@ -25,11 +25,11 @@ class PublicController extends AbstractController
     }
 
     /**
-     * @Route("/restaurateur", name="restaurateur")
+     * @Route("/restaurant", name="restaurant")
      */
-    public function restaurateur()
+    public function restaurant()
     {
-        return $this->render(('public/restaurateur.html.twig'));
+        return $this->render(('public/restaurant.html.twig'));
     }
 
 
