@@ -32,6 +32,12 @@ class Plat
      */
     private $Note;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="plats")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Restaurant;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Plat
     public function setNote(float $Note): self
     {
         $this->Note = $Note;
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->Restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $Restaurant): self
+    {
+        $this->Restaurant = $Restaurant;
 
         return $this;
     }
