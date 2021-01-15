@@ -1,6 +1,12 @@
 {% extends "base.html.twig" %}
 {% block body %}
 	<h1>restaurateur</h1>
-	<p></p>
+	{% for plat in resto.plats %}
+		<h2>{{plat.NomPlat}}</h2>
+		<p>{{plat.PrixUnit}}
+			€</p>
+		<p>{{plat.Note}}
+			etoiles</p>
+	{% endfor %}
 
 {% endblock %}

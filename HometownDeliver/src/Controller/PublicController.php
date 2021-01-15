@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,11 @@ class PublicController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(RestaurantRepository $repo)
     {
-        return $this->render(('public/home.html.twig'));
+        return $this->render('public/home.html.twig', [
+            "restaurants" => $repo->findAll()
+        ]);
     }
 
     /**
@@ -25,11 +28,14 @@ class PublicController extends AbstractController
     }
 
     /**
-     * @Route("/restaurant", name="restaurant")
+     * @Route("/restaurant/{id}", name="restaurant")
      */
-    public function restaurant()
+    public function restaurant(RestaurantRepository $repo, $id)
     {
-        return $this->render(('public/restaurant.html.twig'));
+
+        return $this->render('public/restaurant.html.twig', [
+            "resto" => $repo->find($id)
+        ]);
     }
 
 

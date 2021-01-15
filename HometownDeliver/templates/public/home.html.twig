@@ -1,5 +1,18 @@
 {% extends "base.html.twig" %}
 {% block body %}
 	<h1>home</h1>
-
+	{% for resto in restaurants %}
+		<section>
+			<h2>{{resto.NomRestaurant}}</h2>
+			<p>{{resto.Localisation}}</p>
+			<p>{{resto.HoraireOuverture}}</p>
+			<p>{{resto.InfosComplementaire}}</p>
+			<img src="{{resto.ListAllergene}}" alt="">
+			<a href="{{path("restaurant", {'id': resto.id})}}">
+				<button>
+					voir plats
+				</button>
+			</a>
+		</section>
+	{% endfor %}
 {% endblock %}

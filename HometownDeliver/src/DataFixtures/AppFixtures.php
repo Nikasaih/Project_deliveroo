@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
             $manager->persist($restaurant);
             for ($j = 0; $j < 4; $j++) {
                 $plat = new Plat();
-                $plat->setNomPlat("nom plat $i")
+                $plat->setNomPlat("nom plat $j")
                     ->setNote(rand(0, 5))
                     ->setPrixUnit(rand(7, 20))
                     ->setRestaurant($restaurant);
