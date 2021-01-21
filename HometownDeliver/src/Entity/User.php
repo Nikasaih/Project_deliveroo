@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -18,29 +21,20 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $Email;
+    private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="json")
      */
-    private $Password;
+    private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
-    private $Pseudo;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Adresse;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $NumeroTelephone;
+    private $password;
 
     public function getId(): ?int
     {
@@ -49,61 +43,74 @@ class User
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(string $email): self
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->Password;
+        return (string) $this->email;
     }
 
-    public function setPassword(string $Password): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->Password = $Password;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getPseudo(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->Pseudo;
+        return (string) $this->password;
     }
 
-    public function setPseudo(string $Pseudo): self
+    public function setPassword(string $password): self
     {
-        $this->Pseudo = $Pseudo;
+        $this->password = $password;
 
         return $this;
     }
 
-    public function getAdresse(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
     {
-        return $this->Adresse;
+        // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
-    public function setAdresse(string $Adresse): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        $this->Adresse = $Adresse;
-
-        return $this;
-    }
-
-    public function getNumeroTelephone(): ?string
-    {
-        return $this->NumeroTelephone;
-    }
-
-    public function setNumeroTelephone(string $NumeroTelephone): self
-    {
-        $this->NumeroTelephone = $NumeroTelephone;
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
