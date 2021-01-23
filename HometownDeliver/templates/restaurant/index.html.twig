@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RestaurantController!
+{% endblock %}
+
+{% block body %}
+	<h1>
+		restaurant gesstion</h1>
+
+	<p>{{app.user.email}}</p>
+	{% for resto in app.user.Restaurants %}
+		<p>{{resto.NomRestaurant}}</p>
+		<a href="{{path("restaurant", {'id': resto.id})}}">
+			<button>
+				vue public
+			</button>
+		</a>
+
+		<a href="{{path("restaurant_gestion_edit", {'id': resto.id})}}">
+			<button>
+				modifier
+			</button>
+		</a>
+
+
+	{% endfor %}
+	<a href="{{path("restaurant_gestion_create")}}">
+		<button>
+			ajouter un restaurant
+		</button>
+	</a>
+{% endblock %}
