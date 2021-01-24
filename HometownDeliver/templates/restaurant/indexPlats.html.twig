@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RestaurantController!
+{% endblock %}
+
+{% block body %}
+	<h1>index des plats du resto
+		{{resto.id}}</h1>
+
+	{% for plat in resto.plats %}
+		<h2>{{plat.NomPlat}}</h2>
+		<h2>{{plat.id}}</h2>
+		<p>{{plat.PrixUnit}}
+			€</p>
+		<p>{{plat.Note}}
+			etoiles</p>
+
+		<a href="{{path("plat_gestion_edit", { 'resto': resto.id,'id': plat.id})}}">
+			<button>
+				modifier
+			</button>
+		</a>
+	{% endfor %}
+
+	<a href="{{path("plat_gestion_create", { 'resto': resto.id})}}">
+		<button>
+			ajouter un plat
+		</button>
+	</a>
+
+{% endblock %}

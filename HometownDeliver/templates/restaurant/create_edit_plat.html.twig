@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RestaurantController!
+{% endblock %}
+
+{% block body %}
+	<h1>page de formulaire pour changer element plat</h1>
+
+	{{form_start(form)}}
+
+
+	{{form_widget(form)}}
+
+
+	<button>
+		{% if editMode %}
+			enregistrer
+		{% else %}
+			ajouter le plats
+		{% endif %}
+	</button>
+
+	{{form_end(form)}}
+{% endblock %}

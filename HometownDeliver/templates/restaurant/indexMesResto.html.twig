@@ -9,7 +9,10 @@
 
 	<p>{{app.user.email}}</p>
 	{% for resto in app.user.Restaurants %}
-		<p>{{resto.NomRestaurant}}</p>
+		<p>{{resto.NomRestaurant}}
+			{{resto.id}}</p>
+		<p>id du resto
+			{{resto.id}}</p>
 		<a href="{{path("restaurant", {'id': resto.id})}}">
 			<button>
 				vue public
@@ -19,6 +22,12 @@
 		<a href="{{path("restaurant_gestion_edit", {'id': resto.id})}}">
 			<button>
 				modifier
+			</button>
+		</a>
+
+		<a href="{{path("restaurant_gestion_plat", {'id': resto.id})}}">
+			<button>
+				les plats
 			</button>
 		</a>
 

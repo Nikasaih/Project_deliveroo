@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Plat;
 use App\Entity\Restaurant;
 use App\Entity\User;
+use App\Form\PlatType;
 use App\Form\RestaurantType;
 use App\Repository\RestaurantRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,15 +13,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class RestaurantController extends AbstractController
 {
+
+    //RESTAURANT -------------------------------
     /**
      * @Route("/restaurant_gestion", name="restaurant_gestion")
      */
     public function index(): Response
     {
-        return $this->render('restaurant/index.html.twig', [
+        return $this->render('restaurant/indexMesResto.html.twig', [
             'controller_name' => 'RestaurantController'
         ]);
     }
@@ -48,10 +53,59 @@ class RestaurantController extends AbstractController
             return $this->redirectToRoute('restaurant', ['id' => $restaurant->getId()]);
         }
 
-        return $this->render('restaurant/edit.html.twig', [
+        return $this->render('restaurant/create_edit_resto.html.twig', [
             'controller_name' => 'RestaurantController',
             'form' => $form->createView(),
             'editMode' => $restaurant->getId() !== null
+        ]);
+    }
+
+
+    //PLATS -------------------------------
+
+
+    /**
+     * @Route("/restaurant_gestion/{id}/plat", name="restaurant_gestion_plat")
+     */
+    public function indexPlat(Restaurant $restaurant): Response
+    {
+        return $this->render('restaurant/indexPlats.html.twig', [
+            'controller_name' => 'RestaurantController',
+            'resto' => $restaurant
+        ]);
+    }
+
+
+    /**
+     * @Route("/restaurant_gestion/{resto}/plat/create", name="plat_gestion_create")
+     * @Route("/restaurant_gestion/{resto}/{id}/plat/edit", name="plat_gestion_edit")
+     * @ParamConverter("restaurant", options={"id" = "resto"})
+     */
+    public function plat_Edit(Request $request, Restaurant $restaurant, Plat $plat = null,  EntityManagerInterface $manager): Response
+    {
+
+        if (!$plat) {
+            $plat = new Plat();
+        }
+
+        $form = $this->createForm(PlatType::class, $plat);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) /*permet de verifier si le formulaire est bon et d'ensuite faire les maneuvre sur la bdd*/ {
+            if (!$plat->getId()) {
+                $plat->setRestaurant($restaurant);
+            }
+            $manager->persist($plat);
+            $manager->flush();
+
+            return $this->redirectToRoute('restaurant_gestion_plat', ['id' => $restaurant->getId()]);
+        }
+
+        return $this->render('restaurant/create_edit_plat.html.twig', [
+            'controller_name' => 'RestaurantController',
+            'form' => $form->createView(),
+            'editMode' => $plat->getId() !== null
         ]);
     }
 }

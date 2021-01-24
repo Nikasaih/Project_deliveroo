@@ -2,16 +2,13 @@
 {% block body %}
 	<h1>restaurateur</h1>
 	<section>
+		<h2>{{resto.Id}}</h2>
 		<h2>{{resto.NomRestaurant}}</h2>
 		<p>{{resto.Localisation}}</p>
 		<p>{{resto.HoraireOuverture}}</p>
 		<p>{{resto.InfosComplementaire}}</p>
 		<img src="{{resto.ListAllergene}}" alt="">
-		<a href="{{path("restaurant", {'id': resto.id})}}">
-			<button>
-				voir plats
-			</button>
-		</a>
+
 	</section>
 	{% for plat in resto.plats %}
 		<h2>{{plat.NomPlat}}</h2>
