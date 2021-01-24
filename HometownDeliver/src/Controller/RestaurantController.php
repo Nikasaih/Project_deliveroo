@@ -60,6 +60,17 @@ class RestaurantController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/restaurant_gestion/{id}delete", name="restaurant_gestion_delete")
+     */
+    public function resto_delete(Restaurant $restaurant, EntityManagerInterface $manager)
+    {
+        $manager->remove($restaurant);
+        $manager->flush();
+
+        return $this->redirectToRoute('restaurant_gestion');
+    }
+
 
     //PLATS -------------------------------
 
@@ -107,5 +118,18 @@ class RestaurantController extends AbstractController
             'form' => $form->createView(),
             'editMode' => $plat->getId() !== null
         ]);
+    }
+
+    /**
+     * @Route("/restaurant_gestion/{resto}/{id}/plat/delete", name="plat_gestion_delete")
+     * 
+     * @ParamConverter("restaurant", options={"id" = "resto"})
+     */
+    public function plat_delete(Plat $plat, Restaurant $restaurant, EntityManagerInterface $manager)
+    {
+        $manager->remove($plat);
+        $manager->flush();
+
+        return $this->redirectToRoute('restaurant_gestion_plat', ['id' => $restaurant->getId()]);
     }
 }

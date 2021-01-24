@@ -25,6 +25,13 @@
 			</button>
 		</a>
 
+
+		<a onclick="return confirm('Attention ceci va supprimé le restaurant définitivement')" href="{{path("restaurant_gestion_delete", {'id': resto.id})}}">
+			<button>
+				supprimer
+			</button>
+		</a>
+
 		<a href="{{path("restaurant_gestion_plat", {'id': resto.id})}}">
 			<button>
 				les plats

@@ -20,6 +20,12 @@
 				modifier
 			</button>
 		</a>
+
+		<a href="{{path("plat_gestion_delete", { 'resto': resto.id,'id': plat.id})}}">
+			<button>
+				supprimer
+			</button>
+		</a>
 	{% endfor %}
 
 	<a href="{{path("plat_gestion_create", { 'resto': resto.id})}}">
