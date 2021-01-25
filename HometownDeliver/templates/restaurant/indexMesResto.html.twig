@@ -10,9 +10,7 @@
 	<p>{{app.user.email}}</p>
 	{% for resto in app.user.Restaurants %}
 		<p>{{resto.NomRestaurant}}
-			{{resto.id}}</p>
-		<p>id du resto
-			{{resto.id}}</p>
+		</p>
 		<a href="{{path("restaurant", {'id': resto.id})}}">
 			<button>
 				vue public
