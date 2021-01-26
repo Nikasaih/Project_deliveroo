@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 {% block body %}
 	<h1>plat</h1>
-
+	{% for plat in plats %}
+		<h2>{{plat.NomPlat}}</h2>
+		<img src="/uploads/{{plat.photo}}" alt="ma phto">
+		<p>{{plat.Restaurant.NomRestaurant}}</p>
+		<p>{{plat.Note}}</p>
+	{% endfor %}
 {% endblock %}

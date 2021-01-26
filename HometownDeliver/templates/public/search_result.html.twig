@@ -1,0 +1,177 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<!--debup search form -->
+
+	<section class="backgraound">
+		<form action="{{path('search')}}" method="POST">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="back">
+							<div class="line1 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"></div>
+							<div class="line2 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"></div>
+							<h2 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s">HomeTown, partenaire de plus 5000 Restaurants</h2>
+							<h3 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="1s">Commander en ligne</h3>
+							<div class="line3 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"></div>
+							<div class="line4 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4">
+					<div class="textbox os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+						<h3>Ville</h3>
+						<input type="text" placeholder="Lyon; Paris; ..." name="Ville"/>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4">
+					<div class="textbox os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+						<h3>Nom du restaurant</h3>
+						<input type="text" name="Restaurant" placeholder="KFC; McDonald; ..."/>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4">
+					<div class="textbox1 os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+						<h3>Plats</h3>
+						<input type="text" placeholder="Buckets; BigMac; ... " name="Plat"/>
+						<span class="search">
+							<a href="{{path('search')}}">
+								<button type="submit">search
+								</button>
+							</a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	{% if Restaurant is defined and Restaurant is not empty and Ville is defined and Ville is not empty and Plat is defined and Plat is not empty %}
+
+		{% for Resto in restoRepo %}
+			{% if Resto.NomRestaurant == Restaurant and Resto.Localisation ==  Ville %}
+				{% for plat in Resto.plats %}
+					{% if plat.NomPlat ==  Plat %}
+
+						<!--debug affichage des resto											-->
+						<p>nom du resto
+							{{Resto.NomRestaurant}}
+						</p>
+						<p>localisation du resto
+							{{Resto.Localisation}}
+						</p>
+						<p>nom du plat
+							{{plat.NomPlat}}
+						</p>
+						<!--fin debug affichage des resto											-->
+
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
+		{% endfor %}
+		<!-- dual -->
+
+		<!-- resto + ville -->
+	{% elseif Restaurant is defined and Restaurant is not empty and Ville is defined and Ville is not empty %}
+		{% for Resto in restoRepo %}
+			{% if Resto.NomRestaurant == Restaurant and Resto.Localisation ==  Ville %}
+				<!--debug affichage des resto											-->
+				<p>nom du resto
+					{{Resto.NomRestaurant}}
+				</p>
+				<p>localisation du resto
+					{{Resto.Localisation}}
+				</p>
+				<!--fin debug affichage des resto											-->
+			{% endif %}
+
+		{% endfor %}
+
+		<!-- resto + plat -->
+	{% elseif Restaurant is defined and Restaurant is not empty and Plat is defined and Plat is not empty %}
+		{% for Resto in restoRepo %}
+			{% if Resto.NomRestaurant == Restaurant %}
+				{% for plat in Resto.plats %}
+					{% if plat.NomPlat ==  Plat %}
+
+						<!--debug affichage des resto											-->
+						<p>nom du resto
+							{{Resto.NomRestaurant}}
+						</p>
+						<p>nom du plat
+							{{plat.NomPlat}}
+						</p>
+						<!--fin debug affichage des resto											-->
+
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
+		{% endfor %}
+
+
+		<!-- plat + ville -->
+	{% elseif Plat is defined and Plat is not empty and Ville is defined and Ville is not empty %}
+		{% for Resto in restoRepo %}
+			{% if Resto.Localisation ==  Ville %}
+				{% for plat in Resto.plats %}
+					{% if plat.NomPlat ==  Plat %}
+
+						<!--debug affichage des resto											-->
+						<p>localisation du resto
+							{{Resto.Localisation}}
+						</p>
+						<p>nom du plat
+							{{plat.NomPlat}}
+						</p>
+						<!--fin debug affichage des resto											-->
+
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
+		{% endfor %}
+
+
+		<!--solo											-->
+	{% elseif Restaurant is defined and Restaurant is not empty %}
+		<p>{{Restaurant}}</p>
+		{% for Resto in restoRepo %}
+			<p>un resto</p>
+			{% if Resto.NomRestaurant == Restaurant %}
+
+				<p>nom du resto
+					{{Resto.NomRestaurant}}
+				</p>
+			{% endif %}
+
+		{% endfor %}
+
+
+	{% elseif Ville is defined and Ville is not empty %}
+		<p>{{Ville}}</p>
+		{% for Resto in restoRepo %}
+
+			{% if Resto.Localisation ==  Ville %}
+
+				<p>localisation du resto
+					{{Resto.Localisation}}
+				</p>
+			{% endif %}
+
+		{% endfor %}
+
+
+	{% elseif Plat is defined and Plat is not empty %}
+		{% for plat in platRepo %}
+
+			{% if plat.NomPlat ==  Plat %}
+
+				<p>nom du plat
+					{{plat.NomPlat}}
+				</p>
+			{% endif %}
+
+		{% endfor %}
+	{% endif %}
+{% endblock %}
