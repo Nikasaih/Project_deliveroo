@@ -1,0 +1,15 @@
+https://github.com/Nikasaih/Project_deliveroo.git
+
+/*********Ficher d'instruction************/
+
+Système d'exploitation: windows 10 
+wampserver 64bits v3.1.9
+phpMyAdmin v4.8.5
+mariadb 10.3.14
+IDE: vs code
+Framework: Symfony
+
+Récuperer le Projet sur git Hub (lien:https://github.com/Nikasaih/Project_deliveroo.git) ainsi que la BDD
+Faire GitClone et y placer la BDD, Aller sur phpMyAdmin et choisissez l'onglet importer, importer le fichier 'hometowndeliver.sql'
+puis appuyer sur excuter pour finaliser.
+Ouvrir le fichier puis lancer la commande 'composer install' et lancer le serveur symfony en ligne de commande 
