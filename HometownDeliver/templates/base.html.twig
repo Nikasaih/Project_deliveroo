@@ -35,6 +35,7 @@
 			<script type="text/javascript" src="{{asset ('js/waypoints.min.js')}}"></script>
 			<script type="text/javascript" src="{{asset ('js/sidemenu.js')}}"></script>
 			<script type="text/javascript" src="{{asset ('/scripts/main.js')}}"></script>
+			<script type="text/javascript" src="{{asset ('js/cookiebanner.js')}}"></script>
 			<!--JS Icone-->
 			<script type="text/javascript" src="https://unpkg.com/feather-icons"></script>
 			<!--JS Vendor type-->
@@ -114,6 +115,8 @@
 				</div>
 			</section>
 		</header>
+		<script type="text/javascript" id="cookiebanner" src="{{asset ('js/cookiebanner.js')}}" data-cookie="cookieconsent_dismissed" data-height="50px" data-acceptonclick="true" data-position="bottom" data-fg="#ffffff" data-bg="#007bff" data-link="#f1d600" data-moreinfo="@MVC2.Tools.Config.Config_URLNovagreffe_MentionsLegales" data-message="<br>Les cookies assurent le bon fonctionnement de notre site Internet. En utilisant ce dernier, vous acceptez leur utilisation." data-linkmsg="En savoir plus"></script>
+
 	</body>
 </html>
 {% block body %}{% endblock %}

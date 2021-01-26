@@ -35,7 +35,8 @@
 						<input type="text" placeholder="Buckets; BigMac; ... " name="Plat"/>
 						<span class="search">
 							<a href="{{path('search')}}">
-								<button type="submit">search
+								<button type="submit">
+									<i class="fa fa-search" type="submit"></i>
 								</button>
 							</a>
 						</span>
@@ -52,126 +53,211 @@
 				{% for plat in Resto.plats %}
 					{% if plat.NomPlat ==  Plat %}
 
-						<!--debug affichage des resto											-->
-						<p>nom du resto
-							{{Resto.NomRestaurant}}
-						</p>
-						<p>localisation du resto
-							{{Resto.Localisation}}
-						</p>
-						<p>nom du plat
-							{{plat.NomPlat}}
-						</p>
-						<!--fin debug affichage des resto											-->
+						<div class="row">
+							<div class="col-lg-4 col-md-6 mb-4">
+								<div class="card h-100">
+									<div class="card-body">
+										<h2 class="card-title">
+											{{plat.NomPlat}}
+										</h2>
+										<h4>{{plat.PrixUnit}}
+											€</h4>
+										<img src="uploads/{{plat.photo}}" alt="">
+									</div>
+									<a href="{{path("restaurant", {'id': plat.Restaurant.id})}}">
+										<button>
+											voir le restaurant d'origine
+										</button>
+									</a>
+								</div>
+							</div>
+							-->
 
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+
+			{% endfor %}
+			<!-- dual -->
+
+			<!-- resto + ville -->
+		{% elseif Restaurant is defined and Restaurant is not empty and Ville is defined and Ville is not empty %}
+			{% for Resto in restoRepo %}
+				{% if Resto.NomRestaurant == Restaurant and Resto.Localisation ==  Ville %}
+
+					<div class="row">
+						<div class="col-lg-4 col-md-6 mb-4">
+							<div class="card h-100">
+								<a href="#"><img class="card-img-top" src="uploads/{{resto.photo}}" alt=""></a>
+								<div class="card-body">
+									<h2 class="card-title">
+										<a href="#">{{resto.NomRestaurant}}</a>
+									</h2>
+									<p class="card-text">{{resto.Localisation}}</p>
+									<p class="card-text">{{resto.HoraireOuverture}}</p>
+								</div>
+								<a href="{{path("restaurant", {'id': resto.id})}}">
+									<button>
+										voir plats
+									</button>
+								</a>
+							</div>
+						</div>
+						-->
 					{% endif %}
+
 				{% endfor %}
-			{% endif %}
 
-		{% endfor %}
-		<!-- dual -->
+				<!-- resto + plat -->
+			{% elseif Restaurant is defined and Restaurant is not empty and Plat is defined and Plat is not empty %}
+				{% for Resto in restoRepo %}
+					{% if Resto.NomRestaurant == Restaurant %}
+						{% for plat in Resto.plats %}
+							{% if plat.NomPlat ==  Plat %}
 
-		<!-- resto + ville -->
-	{% elseif Restaurant is defined and Restaurant is not empty and Ville is defined and Ville is not empty %}
-		{% for Resto in restoRepo %}
-			{% if Resto.NomRestaurant == Restaurant and Resto.Localisation ==  Ville %}
-				<!--debug affichage des resto											-->
-				<p>nom du resto
-					{{Resto.NomRestaurant}}
-				</p>
-				<p>localisation du resto
-					{{Resto.Localisation}}
-				</p>
-				<!--fin debug affichage des resto											-->
-			{% endif %}
+								<div class="row">
+									<div class="col-lg-4 col-md-6 mb-4">
+										<div class="card h-100">
+											<div class="card-body">
+												<h2 class="card-title">
+													{{plat.NomPlat}}
+												</h2>
+												<h4>{{plat.PrixUnit}}
+													€</h4>
+												<img src="uploads/{{plat.photo}}" alt="">
+											</div>
+											<a href="{{path("restaurant", {'id': plat.Restaurant.id})}}">
+												<button>
+													voir le restaurant d'origine
+												</button>
+											</a>
+										</div>
+									</div>
+									-->
 
-		{% endfor %}
+								{% endif %}
+							{% endfor %}
+						{% endif %}
 
-		<!-- resto + plat -->
-	{% elseif Restaurant is defined and Restaurant is not empty and Plat is defined and Plat is not empty %}
-		{% for Resto in restoRepo %}
-			{% if Resto.NomRestaurant == Restaurant %}
-				{% for plat in Resto.plats %}
-					{% if plat.NomPlat ==  Plat %}
-
-						<!--debug affichage des resto											-->
-						<p>nom du resto
-							{{Resto.NomRestaurant}}
-						</p>
-						<p>nom du plat
-							{{plat.NomPlat}}
-						</p>
-						<!--fin debug affichage des resto											-->
-
-					{% endif %}
-				{% endfor %}
-			{% endif %}
-
-		{% endfor %}
+					{% endfor %}
 
 
-		<!-- plat + ville -->
-	{% elseif Plat is defined and Plat is not empty and Ville is defined and Ville is not empty %}
-		{% for Resto in restoRepo %}
-			{% if Resto.Localisation ==  Ville %}
-				{% for plat in Resto.plats %}
-					{% if plat.NomPlat ==  Plat %}
+					<!-- plat + ville -->
+				{% elseif Plat is defined and Plat is not empty and Ville is defined and Ville is not empty %}
+					{% for Resto in restoRepo %}
+						{% if Resto.Localisation ==  Ville %}
+							{% for plat in Resto.plats %}
+								{% if plat.NomPlat ==  Plat %}
 
-						<!--debug affichage des resto											-->
-						<p>localisation du resto
-							{{Resto.Localisation}}
-						</p>
-						<p>nom du plat
-							{{plat.NomPlat}}
-						</p>
-						<!--fin debug affichage des resto											-->
+									<div class="row">
+										<div class="col-lg-4 col-md-6 mb-4">
+											<div class="card h-100">
+												<div class="card-body">
+													<h2 class="card-title">
+														{{plat.NomPlat}}
+													</h2>
+													<h4>{{plat.PrixUnit}}
+														€</h4>
+													<img src="uploads/{{plat.photo}}" alt="">
+												</div>
+												<a href="{{path("restaurant", {'id': plat.Restaurant.id})}}">
+													<button>
+														voir le restaurant d'origine
+													</button>
+												</a>
+											</div>
+										</div>
+										-->
 
-					{% endif %}
-				{% endfor %}
-			{% endif %}
+									{% endif %}
+								{% endfor %}
+							{% endif %}
 
-		{% endfor %}
-
-
-		<!--solo											-->
-	{% elseif Restaurant is defined and Restaurant is not empty %}
-		<p>{{Restaurant}}</p>
-		{% for Resto in restoRepo %}
-			<p>un resto</p>
-			{% if Resto.NomRestaurant == Restaurant %}
-
-				<p>nom du resto
-					{{Resto.NomRestaurant}}
-				</p>
-			{% endif %}
-
-		{% endfor %}
+						{% endfor %}
 
 
-	{% elseif Ville is defined and Ville is not empty %}
-		<p>{{Ville}}</p>
-		{% for Resto in restoRepo %}
+						<!--solo											-->
+					{% elseif Restaurant is defined and Restaurant is not empty %}
+						<p>{{Restaurant}}</p>
+						{% for resto in restoRepo %}
+							{% if resto.NomRestaurant == Restaurant %}
+								<div class="row">
+									<div class="col-lg-4 col-md-6 mb-4">
+										<div class="card h-100">
+											<a href="#"><img class="card-img-top" src="uploads/{{resto.photo}}" alt=""></a>
+											<div class="card-body">
+												<h2 class="card-title">
+													<a href="#">{{resto.NomRestaurant}}</a>
+												</h2>
+												<p class="card-text">{{resto.Localisation}}</p>
+												<p class="card-text">{{resto.HoraireOuverture}}</p>
+											</div>
+											<a href="{{path("restaurant", {'id': resto.id})}}">
+												<button>
+													voir plats
+												</button>
+											</a>
+										</div>
+									</div>
 
-			{% if Resto.Localisation ==  Ville %}
+								{% endif %}
 
-				<p>localisation du resto
-					{{Resto.Localisation}}
-				</p>
-			{% endif %}
-
-		{% endfor %}
+							{% endfor %}
 
 
-	{% elseif Plat is defined and Plat is not empty %}
-		{% for plat in platRepo %}
+						{% elseif Ville is defined and Ville is not empty %}
+							<p>{{Ville}}</p>
+							{% for resto in restoRepo %}
 
-			{% if plat.NomPlat ==  Plat %}
+								{% if resto.Localisation ==  Ville %}
 
-				<p>nom du plat
-					{{plat.NomPlat}}
-				</p>
-			{% endif %}
+									<div class="row">
+										<div class="col-lg-4 col-md-6 mb-4">
+											<div class="card h-100">
+												<a href="#"><img class="card-img-top" src="uploads/{{resto.photo}}" alt=""></a>
+												<div class="card-body">
+													<h2 class="card-title">
+														<a href="#">{{resto.NomRestaurant}}</a>
+													</h2>
+													<p class="card-text">{{resto.Localisation}}</p>
+													<p class="card-text">{{resto.HoraireOuverture}}</p>
+												</div>
+												<a href="{{path("restaurant", {'id': resto.id})}}">
+													<button>
+														voir plats
+													</button>
+												</a>
+											</div>
+										</div>
+									{% endif %}
 
-		{% endfor %}
-	{% endif %}
-{% endblock %}
+								{% endfor %}
+
+
+							{% elseif Plat is defined and Plat is not empty %}
+								{% for plat in platRepo %}
+
+									{% if plat.NomPlat ==  Plat %}
+										<div class="row">
+											<div class="col-lg-4 col-md-6 mb-4">
+												<div class="card h-100">
+													<div class="card-body">
+														<h2 class="card-title">
+															{{plat.NomPlat}}
+														</h2>
+														<h4>{{plat.PrixUnit}}
+															€</h4>
+														<img src="uploads/{{plat.photo}}" alt="">
+													</div>
+													<a href="{{path("restaurant", {'id': plat.Restaurant.id})}}">
+														<button>
+															voir le restaurant d'origine
+														</button>
+													</a>
+												</div>
+											</div>
+										{% endif %}
+
+									{% endfor %}
+								{% endif %}
+							{% endblock %}

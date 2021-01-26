@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 {% block body %}
-	<h1>restaurateur</h1>
 	<section>
-		<h2>{{resto.Id}}</h2>
 		<h2>{{resto.NomRestaurant}}</h2>
-		<p>{{resto.Localisation}}</p>
-		<p>{{resto.HoraireOuverture}}</p>
+		<p>Est basé a :
+			{{resto.Localisation}}</p>
+		<p>Horraire d'ouverture :
+			{{resto.HoraireOuverture}}</p>
 		<p>{{resto.InfosComplementaire}}</p>
 		<img src="/uploads/{{resto.photo}}" alt="ma phto">
 		<img src="/uploads/{{resto.ListAllergene}}" alt="ma phto">
