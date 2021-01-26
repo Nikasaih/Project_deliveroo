@@ -2,64 +2,118 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 		<title>
-			{% block title %}Welcome!
+			{% block title %}HomeTown
 			{% endblock %}
 		</title>
-		{% block stylesheets %}{% endblock %}
+		{% block stylesheets %}
+			<!--CSS Google-->
+			<link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+			<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css'/>
+			<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+			<!--CSS Files-->
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/bootstrap.css')}}"/>
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/style.css')}}"/>
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/font-awesome.css')}}"/>
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/animate.css')}}">
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/responsive.css')}}"/>
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/util.css')}}">
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/main.css')}}">
+			<link rel="stylesheet" type="text/css" href="{{asset ('css/shop-homepage.css')}}">
+			<link
+			rel="stylesheet" type="text/css" href="{{asset ('css/profil.css')}}">
+			<!--CSS vendor type-->
+			<link rel="stylesheet" type="text/css" href="vendor_home/bootstrap/css/bootstrap.min.css">
+		{% endblock %}
+		{% block javascripts %}
+			<!--JS Files-->
+			<script type="text/javascript" src="{{asset ('js/jquery-1.11.3.min.js')}}"></script>
+			<script type="text/javascript" src="{{asset ('js/scripts.js')}}"></script>
+			<script type="text/javascript" src="{{asset ('js/waypoints.min.js')}}"></script>
+			<script type="text/javascript" src="{{asset ('js/sidemenu.js')}}"></script>
+			<script type="text/javascript" src="{{asset ('/scripts/main.js')}}"></script>
+			<!--JS Icone-->
+			<script type="text/javascript" src="https://unpkg.com/feather-icons"></script>
+			<!--JS Vendor type-->
+			<script type="text/javascript" src="vendor_home/jquery/jquery.min.js"></script>
+			<script type="text/javascript" src="vendor_home/bootstrap/js/bootstrap.bundle.min.js"></script>
+		{% endblock %}
 	</head>
 	<body>
 		<header>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="#">Navbar</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavDropdown">
-					<ul class="navbar-nav">
-						<li class="nav-item active">
-							<!-- _______________________________________________________________-->
-							<!-- debug bar-->
-								<a class="nav-link" href="{{path('home')}}"> Home
-								<span class="sr-only">(current)</span>
-							</a>
-
-							<a class="nav-link" href="{{path('userProfil')}}">mon profil
-								<span class="sr-only">(current)</span>
-							</a>
-
-							<a class="nav-link" href="{{path('app_login')}}">me connecter
-								<span class="sr-only">(current)</span>
-							</a>
-							<a class="nav-link" href="{{path('app_register')}}">m'inscrire
-								<span class="sr-only">(current)</span>
-							</a>
-
-							<a class="nav-link" href="{{path('app_logout')}}">me deco
-								<span class="sr-only">(current)</span>
-							</a>
-
-							{% if is_granted('ROLE_RESTO') %}
-								<a class="nav-link" href="{{path('restaurant_gestion')}}">mes restaurant
-									<span class="sr-only">(current)</span>
-								</a>
-							{% endif %}
-							<!-- fin debug bar-->
-							<!-- _______________________________________________________________-->
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Dropdown link
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="">Restaurateur</a>
-								<a class="dropdown-item" href="#">Another action</a>
+			<section class="saction1">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div style="font-family: sans-sherif; ">
+								<h1>
+									Home
+									<span style="color: #e24425">Town</span>
+								</h1>
 							</div>
-						</li>
-					</ul>
+							<div class="menu">
+
+								<div class="mobile-nav-container"></div>
+								<div class="mobile-nav-btn"><img class="nav-open" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open"/>
+									<img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close"/>
+								</div>
+								<nav>
+									<ul>
+										<li>
+											<a href="{{path('home')}}">Home</a>
+										</li>
+										<li>
+											{% if is_granted('ROLE_RESTO') %}
+												<a class="" href="{{path('restaurant_gestion')}}">mes restaurants
+													<span class="sr-only">(current)</span>
+												</a>
+											{% endif %}
+										</li>
+										<li>
+											{% if is_granted('ROLE_ADMIN') %}
+												<a class="" href="{{path('admin')}}">Admin
+													<span class="sr-only">(current)</span>
+												</a>
+											{% endif %}
+										</li>
+										<li>
+											<a href="#offer">Plats
+											</a>
+										</li>
+										<li>
+											{% if app.user %}
+												<a href="{{path('userProfil')}}">Profil</a>
+											{% endif %}
+
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<div class="login">
+								<ul>
+
+									{% if app.user %}
+										<li>
+											<a class="" href="{{path('app_logout')}}">Se déconnecter</a>
+										</li>
+									{% else %}
+										<li>
+											<a class="" href="{{path('app_login')}}">Se connecter</a>
+										</li>
+										<li>
+											<a class="" href="{{path('app_register')}}">S'inscrire</a>
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
-			</nav>
-		</body>
+			</section>
+		</header>
 	</body>
-</html></header>{% block body %}{% endblock %}{% block javascripts %}{% endblock %}<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></body></html>
+</html>
+{% block body %}{% endblock %}

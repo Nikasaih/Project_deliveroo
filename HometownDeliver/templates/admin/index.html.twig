@@ -71,6 +71,22 @@
 			</a>
 
 		{% endfor %}
+	{% else %}
 
+		<a href="{{path("resto_admin")}}">
+			<button>
+				Restaurant
+			</button>
+		</a>
+		<a href="{{path("plat_admin")}}">
+			<button>
+				Plat
+			</button>
+		</a>
+		<a href="{{path("user_admin")}}">
+			<button>
+				utilisateur
+			</button>
+		</a>
 	{% endif %}
 {% endblock %}

@@ -1,19 +1,150 @@
 {% extends "base.html.twig" %}
 {% block body %}
-	<h1>home</h1>
 
-	{% for resto in restaurants %}
-		<section>
-			<h2>{{resto.NomRestaurant}}</h2>
-			<p>{{resto.Localisation}}</p>
-			<p>{{resto.HoraireOuverture}}</p>
-			<p>{{resto.InfosComplementaire}}</p>
-			<img src="{{resto.ListAllergene}}" alt="">
-			<a href="{{path("restaurant", {'id': resto.id})}}">
-				<button>
-					voir plats
-				</button>
-			</a>
-		</section>
-	{% endfor %}
-{% endblock %}
+	<section class="backgraound">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="back">
+						<div class="line1 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"></div>
+						<div class="line2 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"></div>
+						<h2 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s">HomeTown, partenaire de plus 5000 Restaurants</h2>
+						<h3 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="1s">Commander en ligne</h3>
+						<div class="line3 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"></div>
+						<div class="line4 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<div class="textbox os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+					<h3>Ville</h3>
+					<input type="text" placeholder="Lyon; Paris; ..."/>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<div class="textbox os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+					<h3>Nom du restaurant</h3>
+					<input type="text" placeholder="KFC; McDonald; ..."/>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<div class="textbox1 os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+					<h3>Plats</h3>
+					<input type="text" placeholder="Buckets; BigMac; ..."/>
+					<span class="search">
+						<a href="#">
+							<i class="fa fa-search"></i>
+						</a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			{% for resto in restaurants %}
+				<div class="row">
+					<div class="col-lg-4 col-md-6 mb-4">
+						<div class="card h-100">
+							<a href="#"><img class="card-img-top" src="{{resto.ListAllergene}}" alt=""></a>
+							<div class="card-body">
+								<h2 class="card-title">
+									<a href="#">{{resto.NomRestaurant}}</a>
+								</h2>
+								<h4>$24.99</h4>
+								<p class="card-text">{{resto.Localisation}}</p>
+								<p class="card-text">{{resto.HoraireOuverture}}</p>
+							</div>
+							<a href="{{path("restaurant", {'id': resto.id})}}">
+								<button>
+									voir plats
+								</button>
+							</a>
+						</div>
+					</div>
+
+				{% endfor %}
+			</section>
+			<footer class="saction8">
+				<div class="container" id="contact">
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-3">
+							<div class="site">
+								<h3>Site Link</h3>
+							</div>
+							<div class="sitelink">
+								<ul>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">About Us</a>
+									</li>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">Contact Us</a>
+									</li>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">Privacy Policy</a>
+									</li>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">Terms of Use</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3">
+							<div class="site">
+								<h3>Site Link</h3>
+							</div>
+							<div class="sitelink">
+								<ul>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">About Us</a>
+									</li>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">Contact Us</a>
+									</li>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">Privacy Policy</a>
+									</li>
+									<li>
+										<span>&#10152;</span>
+										<a href="#">Terms of Use</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3">
+							<div class="follow">
+								<h3>Follow Us On...</h3>
+							</div>
+							<div class="social">
+								<ul>
+									<li>
+										<i class="fa fa-facebook-square"></i>
+										<a href="#">Facebook</a>
+									</li>
+									<li>
+										<i class="fa fa-twitter-square"></i>
+										<a href="#">Twitter</a>
+									</li>
+									<li>
+										<i class="fa fa-linkedin-square"></i>
+										<a href="#">Linkedin</a>
+									</li>
+									<li>
+										<i class="fa fa-google-plus-square"></i>
+										<a href="#">Google Plus</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		{% endblock %}
