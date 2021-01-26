@@ -54,6 +54,11 @@ class Restaurant
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo;
+
     public function __construct()
     {
         $this->plats = new ArrayCollection();
@@ -112,12 +117,12 @@ class Restaurant
         return $this;
     }
 
-    public function getListAllergene(): ?string
+    public function getListAllergene()
     {
         return $this->ListAllergene;
     }
 
-    public function setListAllergene(string $ListAllergene): self
+    public function setListAllergene($ListAllergene): self
     {
         $this->ListAllergene = $ListAllergene;
 
@@ -162,6 +167,18 @@ class Restaurant
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

@@ -7,8 +7,8 @@
 		<p>{{resto.Localisation}}</p>
 		<p>{{resto.HoraireOuverture}}</p>
 		<p>{{resto.InfosComplementaire}}</p>
-		<img src="{{resto.ListAllergene}}" alt="">
-
+		<img src="/uploads/{{resto.photo}}" alt="ma phto">
+		<img src="/uploads/{{resto.ListAllergene}}" alt="ma phto">
 	</section>
 	{% for plat in resto.plats %}
 		<h2>{{plat.NomPlat}}</h2>
@@ -16,6 +16,7 @@
 			€</p>
 		<p>{{plat.Note}}
 			etoiles</p>
+		<img src="/uploads/{{plat.photo}}" alt="ma phto">
 	{% endfor %}
 
 {% endblock %}

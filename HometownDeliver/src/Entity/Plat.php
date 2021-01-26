@@ -38,6 +38,11 @@ class Plat
      */
     private $Restaurant;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Plat
     public function setRestaurant(?Restaurant $Restaurant): self
     {
         $this->Restaurant = $Restaurant;
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

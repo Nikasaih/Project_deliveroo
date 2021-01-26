@@ -47,6 +47,18 @@ class RestaurantController extends AbstractController
             if (!$restaurant->getId()) {
                 $restaurant->setUser($this->get('security.token_storage')->getToken()->getUser());
             }
+
+
+            $file = $restaurant->getListAllergene();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $restaurant->setListAllergene($fileName);
+
+            $file = $restaurant->getPhoto();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $restaurant->setPhoto($fileName);
+
             $manager->persist($restaurant);
             $manager->flush();
 
@@ -107,6 +119,15 @@ class RestaurantController extends AbstractController
             if (!$plat->getId()) {
                 $plat->setRestaurant($restaurant);
             }
+
+
+            $file = $plat->getPhoto();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $plat->setPhoto($fileName);
+
+
+
             $manager->persist($plat);
             $manager->flush();
 
